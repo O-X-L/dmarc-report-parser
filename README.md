@@ -1,28 +1,20 @@
-# parsedmarc
+# DMARC Report Parser
+
+## Upstream
+
+This is a fork of the [parsedmarc project](https://github.com/domainaware/parsedmarc).
+
+This fork aims to refactor the code base of the project to have:
+
+* Less huge functions
+* A more Object-Oriented structure
+* Unit Testing
 
 <p align="center">
   <img src="https://github.com/domainaware/parsedmarc/raw/master/docs/source/_static/screenshots/dmarc-summary-charts.png?raw=true" alt="A screenshot of DMARC summary charts in Kibana"/>
 </p>
 
-`parsedmarc` is a Python module and CLI utility for parsing DMARC
-reports. When used with Elasticsearch and Kibana (or Splunk), it works
-as a self-hosted open-source alternative to commercial DMARC report
-processing services such as Agari Brand Protection, Dmarcian, OnDMARC,
-ProofPoint Email Fraud Defense, and Valimail.
-
-> [!NOTE]
-> __Domain-based Message Authentication, Reporting, and Conformance__ (DMARC) is an email authentication protocol.
-
-## Help Wanted
-
-This project is maintained by one developer. Please consider
-reviewing the open
-[issues](https://github.com/domainaware/parsedmarc/issues) to see how
-you can contribute code, documentation, or user support. Assistance on
-the pinned issues would be particularly helpful.
-
-Thanks to all
-[contributors](https://github.com/domainaware/parsedmarc/graphs/contributors)!
+----
 
 ## Features
 
