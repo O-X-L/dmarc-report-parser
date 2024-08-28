@@ -25,16 +25,11 @@ This fork aims to refactor the code base of the project to have:
 
 ----
 
-## Features
+## Roadmap
 
-- Parses draft and 1.0 standard aggregate/rua reports
-- Parses forensic/failure/ruf reports
-- Can parse reports from an inbox over IMAP, Microsoft Graph, or Gmail
-    API
-- Transparently handles gzip or zip compressed reports
-- Consistent data structures
-- Simple JSON and/or CSV output
-- Optionally email the results
-- Optionally send the results to Elasticsearch and/or Splunk, for use
-    with premade dashboards
-- Optionally send reports to Apache Kafka
+* Refactor huge functions
+* Unit Tests
+* Extend/Replace Docs
+* [Ready-To-Go Docker Compose Setup](https://github.com/O-X-L/dmarc-analyzer)
+  * New Grafana Dashboard
+  * OpenSearch Docs
