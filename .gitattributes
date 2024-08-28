@@ -1,4 +1,0 @@
-docs/source/_static/* filter=lfs diff=lfs merge=lfs -text
-src/dmarc_report_parser/resources/dbip/dbip-country-lite.mmdb filter=lfs diff=lfs merge=lfs -text
-src/dmarc_report_parser/resources/maps/base_reverse_dns_map.csv filter=lfs diff=lfs merge=lfs -text
-src/test/samples/* filter=lfs diff=lfs merge=lfs -text
