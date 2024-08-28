@@ -8,7 +8,7 @@
 
 ## Upstream
 
-This is a fork of the [parsedmarc project](https://github.com/domainaware/parsedmarc).
+**WARNING**: This is a work-in-progress fork of the [parsedmarc project](https://github.com/domainaware/parsedmarc).
 
 This fork aims to refactor the code base of the project to have:
 
