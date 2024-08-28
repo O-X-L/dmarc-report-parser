@@ -1,0 +1,3 @@
+sphinx
+piccolo_theme
+myst-parser
