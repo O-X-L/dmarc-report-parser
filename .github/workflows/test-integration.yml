@@ -1,0 +1,45 @@
+---
+
+name: Integration Tests
+
+on:
+  push:
+    branches: [latest]
+    paths:
+      - '**.py'
+      - '.github/workflows/test-integration.yml'
+      - 'requirements_test_integration.txt'
+  pull_request:
+    branches: [latest]
+    paths:
+      - '**.py'
+      - '**.yml'
+      - '.github/workflows/test-integration.yml'
+      - 'requirements_test_integration.txt'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_test_integration.txt >/dev/null
+          pip install -r requirements.txt >/dev/null
+
+      # todo: integration tests
+      # - name: Running Integration Tests
+      #   run: |

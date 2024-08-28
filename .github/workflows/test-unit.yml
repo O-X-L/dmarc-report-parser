@@ -1,21 +1,21 @@
 ---
 
-name: Test
+name: Unit Tests
 
 on:
   push:
     branches: [latest]
     paths:
       - '**.py'
-      - '.github/workflows/test.yml'
-      - 'requirements_test.txt'
+      - '.github/workflows/test-unit.yml'
+      - 'requirements_test_unit.txt'
   pull_request:
     branches: [latest]
     paths:
       - '**.py'
       - '**.yml'
-      - '.github/workflows/test.yml'
-      - 'requirements_test.txt'
+      - '.github/workflows/test-unit.yml'
+      - 'requirements_test_unit.txt'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,15 +37,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements_test.txt >/dev/null
-          pip install -r requirements_build.txt >/dev/null
+          pip install -r requirements_test_unit.txt >/dev/null
           pip install -r requirements.txt >/dev/null
 
       - name: Running Unit Tests
         run: |
           pytest --version
           python3 -m pytest
-
-      # todo: integration tests
-      # - name: Running Integration Tests
-      #   run: |
