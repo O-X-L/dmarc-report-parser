@@ -4,6 +4,8 @@
 [![Unit Tests](https://github.com/O-X-L/dmarc-report-parser/actions/workflows/test-unit.yml/badge.svg?branch=master)](https://github.com/O-X-L/dmarc-report-parser/actions/workflows/test-unit.yml)
 [![Integration Tests](https://github.com/O-X-L/dmarc-report-parser/actions/workflows/test-integration.yml/badge.svg?branch=master)](https://github.com/O-X-L/dmarc-report-parser/actions/workflows/test-integration.yml)
 
+[Documentation](https://dmarc-report-parser.o-x-l.com/)
+
 ## Upstream
 
 This is a fork of the [parsedmarc project](https://github.com/domainaware/parsedmarc).
