@@ -23,6 +23,7 @@ source_suffix = {
 }
 html_theme_options = {
     'banner_text': '<a href="https://github.com/O-X-L/dmarc-report-parser">Repository on GitHub</a> | '
-                   '<a href="https://github.com/O-X-L/dmarc-report-parser/issues/new">Report errors</a>'
+                   '<a href="https://github.com/O-X-L/dmarc-report-parser/issues/new">Report errors</a> | '
+                   '<a href="https://github.com/domainaware/parsedmarc">Credits to parsedmarc</a>'
 }
 html_short_title = 'DMARC Report Parser'
