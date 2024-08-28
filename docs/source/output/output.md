@@ -8,7 +8,7 @@ the 1.0 report schema standardized in
 [RFC 7480 Appendix C](https://tools.ietf.org/html/rfc7489#appendix-C).
 This draft schema is still in wide use.
 
-`parsedmarc` produces consistent, normalized output, regardless
+`dmarc_report_parser` produces consistent, normalized output, regardless
 of the report schema.
 
 ### JSON aggregate report
@@ -90,7 +90,7 @@ draft,acme.com,noreply-dmarc-support@acme.com,http://acme.com/dmarc/support,9391
 ## Sample forensic report output
 
 Thanks to GitHub user [xennn](https://github.com/xennn) for the anonymized
-[forensic report email sample](<https://github.com/domainaware/parsedmarc/raw/master/samples/forensic/DMARC%20Failure%20Report%20for%20domain.de%20(mail-from%3Dsharepoint%40domain.de%2C%20ip%3D10.10.10.10).eml>).
+[forensic report email sample](<https://github.com/domainaware/dmarc_report_parser/raw/master/samples/forensic/DMARC%20Failure%20Report%20for%20domain.de%20(mail-from%3Dsharepoint%40domain.de%2C%20ip%3D10.10.10.10).eml>).
 
 ### JSON forensic report
 

@@ -12,6 +12,13 @@ Index
    base/*
 
 .. toctree::
+   :caption: Usage
+   :glob:
+   :maxdepth: 1
+
+   usage/*
+
+.. toctree::
    :caption: Inputs
    :glob:
    :maxdepth: 1
