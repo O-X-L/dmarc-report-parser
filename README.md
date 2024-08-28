@@ -15,6 +15,9 @@ This fork aims to refactor the code base of the project to have:
 * Less huge functions
 * A more Object-Oriented structure
 * Unit Testing
+* Improve Documentation for practical Use-Cases
+
+----
 
 <p align="center">
   <img src="https://github.com/domainaware/parsedmarc/raw/master/docs/source/_static/screenshots/dmarc-summary-charts.png?raw=true" alt="A screenshot of DMARC summary charts in Kibana"/>
