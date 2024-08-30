@@ -4,16 +4,15 @@ name: Unit Tests
 
 on:
   push:
-    branches: [latest]
+    branches: [latest, master]
     paths:
       - '**.py'
       - '.github/workflows/test-unit.yml'
       - 'requirements_test_unit.txt'
   pull_request:
-    branches: [latest]
+    branches: [latest, master]
     paths:
       - '**.py'
-      - '**.yml'
       - '.github/workflows/test-unit.yml'
       - 'requirements_test_unit.txt'
 jobs:

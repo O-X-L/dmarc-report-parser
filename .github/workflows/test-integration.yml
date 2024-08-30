@@ -4,16 +4,15 @@ name: Integration Tests
 
 on:
   push:
-    branches: [latest]
+    branches: [latest, master]
     paths:
       - '**.py'
       - '.github/workflows/test-integration.yml'
       - 'requirements_test_integration.txt'
   pull_request:
-    branches: [latest]
+    branches: [latest, master]
     paths:
       - '**.py'
-      - '**.yml'
       - '.github/workflows/test-integration.yml'
       - 'requirements_test_integration.txt'
 jobs:
