@@ -16,16 +16,14 @@ from multiprocessing import Pipe, Process
 import sys
 from tqdm import tqdm
 
-from main import get_dmarc_reports_from_mailbox, watch_inbox, \
+from .main import get_dmarc_reports_from_mailbox, watch_inbox, \
     parse_report_file, get_dmarc_reports_from_mbox, save_output, email_results, ParserError, \
     __version__, InvalidDMARCReport
-from output import kafkaclient, splunk, s3, syslog, loganalytics, gelf, elastic, opensearch
-
-from input.main import IMAPConnection, MSGraphConnection, GmailConnection
-from input.graph import AuthMethod
-
-from utils.log import logger
-from utils.main import is_mbox
+from .output import kafkaclient, splunk, s3, syslog, loganalytics, gelf, elastic, opensearch
+from .input.main import IMAPConnection, MSGraphConnection, GmailConnection
+from .input.graph import AuthMethod
+from .utils.log import logger
+from .utils.main import is_mbox
 
 formatter = logging.Formatter(
     fmt='%(levelname)8s:%(filename)s:%(lineno)d:%(message)s',

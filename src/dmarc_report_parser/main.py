@@ -25,12 +25,12 @@ from expiringdict import ExpiringDict
 from lxml import etree
 from mailsuite.smtp import send_email
 
-from utils.log import logger
-from input.main import MailboxConnection
-from utils.main import get_base_domain, get_ip_address_info
-from utils.main import is_outlook_msg, convert_outlook_msg
-from utils.main import parse_email
-from utils.main import timestamp_to_human, human_timestamp_to_datetime
+from .utils.log import logger
+from .input.main import MailboxConnection
+from .utils.main import get_base_domain, get_ip_address_info
+from .utils.main import is_outlook_msg, convert_outlook_msg
+from .utils.main import parse_email
+from .utils.main import timestamp_to_human, human_timestamp_to_datetime
 
 __version__ = '0.0.0'
 

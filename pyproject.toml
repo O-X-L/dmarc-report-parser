@@ -35,6 +35,8 @@ version = {file = ["VERSION"]}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["dmarc_report_parser"]
+exclude = ["dmarc_report_parser.testdata"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt"]

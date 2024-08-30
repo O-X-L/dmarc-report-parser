@@ -33,7 +33,7 @@ import geoip2.errors
 import publicsuffixlist
 import requests
 
-from log import logger
+from .log import logger
 from ..resources import dbip as resource_dbip
 from ..resources import maps as resource_maps
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from log import logger
+from ..utils.log import logger
 from azure.core.exceptions import HttpResponseError
 from azure.identity import ClientSecretCredential
 from azure.monitor.ingestion import LogsIngestionClient

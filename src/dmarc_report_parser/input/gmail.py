@@ -11,7 +11,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from ..utils.log import logger
-from mailbox_connection import MailboxConnection
+from .mailbox_connection import MailboxConnection
 
 
 def _get_creds(token_file, credentials_file, scopes, oauth2_port):

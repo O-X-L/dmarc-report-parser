@@ -1,13 +1,13 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import os
 import unittest
 from glob import glob
 
 from lxml import etree
 
-import dmarc_report_parser
-import dmarc_report_parser.utils
+from .utils import main as util
+from .main import extract_report, parse_report_file, parsed_forensic_reports_to_csv, \
+    parsed_aggregate_reports_to_csv, parse_report_email, parsed_smtp_tls_reports_to_csv, ParserError
+from .testdata import td
 
 
 def minify_xml(xml_string):
@@ -28,26 +28,25 @@ class Test(unittest.TestCase):
         """Test base64 decoding"""
         # Example from Wikipedia Base64 article
         b64_str = "YW55IGNhcm5hbCBwbGVhcw"
-        decoded_str = dmarc_report_parser.utils.decode_base64(b64_str)
+        decoded_str = util.decode_base64(b64_str)
         assert decoded_str == b"any carnal pleas"
 
     def testPSLDownload(self):
         subdomain = "foo.example.com"
-        result = dmarc_report_parser.utils.get_base_domain(subdomain)
+        result = util.get_base_domain(subdomain)
         assert result == "example.com"
 
         # Test newer PSL entries
         subdomain = "e3191.c.akamaiedge.net"
-        result = dmarc_report_parser.utils.get_base_domain(subdomain)
+        result = util.get_base_domain(subdomain)
         assert result == "c.akamaiedge.net"
 
     def testExtractReportXMLComparator(self):
         """Test XML comparator function"""
         print()
-        xmlnice = open("samples/extract_report/nice-input.xml").read()
+        xmlnice = open(f"{td()}/extract_report/nice-input.xml").read()
         print(xmlnice)
-        xmlchanged = minify_xml(open(
-            "samples/extract_report/changed-input.xml").read())
+        xmlchanged = minify_xml(open(f"{td()}/extract_report/changed-input.xml").read())
         print(xmlchanged)
         self.assertTrue(compare_xml(xmlnice, xmlnice))
         self.assertTrue(compare_xml(xmlchanged, xmlchanged))
@@ -58,48 +57,46 @@ class Test(unittest.TestCase):
     def testExtractReportBytes(self):
         """Test extract report function for bytes string input"""
         print()
-        file = "samples/extract_report/nice-input.xml"
+        file = f"{td()}/extract_report/nice-input.xml"
         with open(file, 'rb') as f:
             data = f.read()
         print("Testing {0}: " .format(file), end="")
-        xmlout = dmarc_report_parser.extract_report(data)
-        xmlin = open("samples/extract_report/nice-input.xml").read()
+        xmlout = extract_report(data)
+        xmlin = open(f"{td()}/extract_report/nice-input.xml").read()
         self.assertTrue(compare_xml(xmlout, xmlin))
         print("Passed!")
 
     def testExtractReportXML(self):
         """Test extract report function for XML input"""
         print()
-        file = "samples/extract_report/nice-input.xml"
+        file = f"{td()}/extract_report/nice-input.xml"
         print("Testing {0}: " .format(file), end="")
-        xmlout = dmarc_report_parser.extract_report(file)
-        xmlin = open("samples/extract_report/nice-input.xml").read()
+        xmlout = extract_report(file)
+        xmlin = open(f"{td()}/extract_report/nice-input.xml").read()
         self.assertTrue(compare_xml(xmlout, xmlin))
         print("Passed!")
 
     def testExtractReportGZip(self):
         """Test extract report function for gzip input"""
         print()
-        file = "samples/extract_report/nice-input.xml.gz"
+        file = f"{td()}/extract_report/nice-input.xml.gz"
         print("Testing {0}: " .format(file), end="")
-        xmlout = dmarc_report_parser.extract_report(file)
-        xmlin = open("samples/extract_report/nice-input.xml").read()
+        xmlout = extract_report(file)
+        xmlin = open(f"{td()}/extract_report/nice-input.xml").read()
         self.assertTrue(compare_xml(xmlout, xmlin))
         print("Passed!")
 
     def testExtractReportZip(self):
         """Test extract report function for zip input"""
         print()
-        file = "samples/extract_report/nice-input.xml.zip"
+        file = f"{td()}/extract_report/nice-input.xml.zip"
         print("Testing {0}: " .format(file), end="")
-        xmlout = dmarc_report_parser.extract_report(file)
+        xmlout = extract_report(file)
         print(xmlout)
-        xmlin = minify_xml(open(
-            "samples/extract_report/nice-input.xml").read())
+        xmlin = minify_xml(open(f"{td()}/extract_report/nice-input.xml").read())
         print(xmlin)
         self.assertTrue(compare_xml(xmlout, xmlin))
-        xmlin = minify_xml(open(
-            "samples/extract_report/changed-input.xml").read())
+        xmlin = minify_xml(open(f"{td()}/extract_report/changed-input.xml").read())
         print(xmlin)
         self.assertFalse(compare_xml(xmlout, xmlin))
         print("Passed!")
@@ -107,47 +104,47 @@ class Test(unittest.TestCase):
     def testAggregateSamples(self):
         """Test sample aggregate/rua DMARC reports"""
         print()
-        sample_paths = glob("samples/aggregate/*")
+        sample_paths = glob(f"{td()}/aggregate/*")
         for sample_path in sample_paths:
             if os.path.isdir(sample_path):
                 continue
             print("Testing {0}: " .format(sample_path), end="")
-            parsed_report = dmarc_report_parser.parse_report_file(
+            parsed_report = parse_report_file(
                 sample_path, always_use_local_files=True)["report"]
-            dmarc_report_parser.parsed_aggregate_reports_to_csv(parsed_report)
+            parsed_aggregate_reports_to_csv(parsed_report)
             print("Passed!")
 
     def testEmptySample(self):
         """Test empty/unparasable report"""
-        with self.assertRaises(dmarc_report_parser.ParserError):
-            dmarc_report_parser.parse_report_file('samples/empty.xml')
+        with self.assertRaises(ParserError):
+            parse_report_file(f"{td()}/empty.xml")
 
     def testForensicSamples(self):
         """Test sample forensic/ruf/failure DMARC reports"""
         print()
-        sample_paths = glob("samples/forensic/*.eml")
+        sample_paths = glob(f"{td()}/forensic/*.eml")
         for sample_path in sample_paths:
             print("Testing {0}: ".format(sample_path), end="")
             with open(sample_path) as sample_file:
                 sample_content = sample_file.read()
-                parsed_report = dmarc_report_parser.parse_report_email(
+                parsed_report = parse_report_email(
                     sample_content)["report"]
-            parsed_report = dmarc_report_parser.parse_report_file(
+            parsed_report = parse_report_file(
                 sample_path)["report"]
-            dmarc_report_parser.parsed_forensic_reports_to_csv(parsed_report)
+            parsed_forensic_reports_to_csv(parsed_report)
             print("Passed!")
 
     def testSmtpTlsSamples(self):
         """Test sample SMTP TLS reports"""
         print()
-        sample_paths = glob("samples/smtp_tls/*")
+        sample_paths = glob(f"{td()}/smtp_tls/*")
         for sample_path in sample_paths:
             if os.path.isdir(sample_path):
                 continue
             print("Testing {0}: " .format(sample_path), end="")
-            parsed_report = dmarc_report_parser.parse_report_file(
+            parsed_report = parse_report_file(
                 sample_path)["report"]
-            dmarc_report_parser.parsed_smtp_tls_reports_to_csv(parsed_report)
+            parsed_smtp_tls_reports_to_csv(parsed_report)
             print("Passed!")
 
 

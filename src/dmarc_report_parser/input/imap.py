@@ -5,7 +5,7 @@ from mailsuite.imap import IMAPClient
 from socket import timeout
 
 from ..utils.log import logger
-from mailbox_connection import MailboxConnection
+from .mailbox_connection import MailboxConnection
 
 
 class IMAPConnection(MailboxConnection):
