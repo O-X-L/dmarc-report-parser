@@ -12,6 +12,7 @@
 
 This fork aims to refactor the code base of the project to have:
 
+* Focus on the core-functionality of parsing DMARC reports
 * Less huge functions
 * A more Object-Oriented structure
 * Unit Testing
